@@ -34,9 +34,6 @@ class RolePolicy
 
     public function delete(AuthUser $authUser, Role $role): bool
     {
-        if (in_array($role->id, [1, 2])) {
-            return false;
-        }
         return $authUser->can('Delete:Role');
     }
 
@@ -47,9 +44,6 @@ class RolePolicy
 
     public function forceDelete(AuthUser $authUser, Role $role): bool
     {
-        if (in_array($role->id, [1, 2])) {
-            return false;
-        }
         return $authUser->can('ForceDelete:Role');
     }
 
