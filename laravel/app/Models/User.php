@@ -10,11 +10,12 @@ use Illuminate\Notifications\Notifiable;
 use Spatie\Permission\Traits\HasRoles;
 use Spatie\Activitylog\Traits\LogsActivity;
 use Spatie\Activitylog\LogOptions;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 class User extends Authenticatable
 {
     /** @use HasFactory<\Database\Factories\UserFactory> */
-    use HasFactory, Notifiable, HasRoles, HasAuditColumns, LogsActivity;
+    use HasFactory, Notifiable, HasRoles, HasAuditColumns, LogsActivity, SoftDeletes;
 
     public function getActivitylogOptions(): LogOptions
     {

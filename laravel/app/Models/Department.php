@@ -6,10 +6,11 @@ use App\Traits\HasAuditColumns;
 use Illuminate\Database\Eloquent\Model;
 use Spatie\Activitylog\Traits\LogsActivity;
 use Spatie\Activitylog\LogOptions;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Department extends Model
 {
-    use HasAuditColumns, LogsActivity;
+    use HasAuditColumns, LogsActivity, SoftDeletes;
 
     public function getActivitylogOptions(): LogOptions
     {

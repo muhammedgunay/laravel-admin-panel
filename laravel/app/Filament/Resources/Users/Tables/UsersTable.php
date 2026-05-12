@@ -12,6 +12,12 @@ use Filament\Support\Icons\Heroicon;
 use Filament\Tables\Columns\IconColumn;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Table;
+use Filament\Tables\Filters\TrashedFilter;
+use Filament\Actions\DeleteAction;
+use Filament\Actions\RestoreAction;
+use Filament\Actions\ForceDeleteAction;
+use Filament\Actions\RestoreBulkAction;
+use Filament\Actions\ForceDeleteBulkAction;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Support\Facades\Auth;
 
@@ -73,9 +79,13 @@ class UsersTable
             ])
             ->filters([
                 \App\Traits\HasAdvancedFilters::getAdvancedFilter(\App\Models\User::class),
+                TrashedFilter::make(),
             ])
             ->recordActions([
                 EditAction::make(),
+                DeleteAction::make(),
+                RestoreAction::make(),
+                ForceDeleteAction::make(),
                 Action::make('impersonate')
                     ->label(__('Impersonate'))
                     ->icon(Heroicon::OutlinedArrowPath)
@@ -163,6 +173,9 @@ class UsersTable
                                 ->warning()
                                 ->send();
                         }),
+                    DeleteBulkAction::make(),
+                    RestoreBulkAction::make(),
+                    ForceDeleteBulkAction::make(),
                 ]),
             ]);
     }
